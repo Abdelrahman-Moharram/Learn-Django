@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+        {{details.slug}}
+{% endblock title %}
+
+{% block body %}
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>{{details.name}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if messages != '' %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    
+                    
+                    <div class="apply_job_form white-bg">
+                        <h4>LOGIN</h4>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email address</label>
+                              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+   {% endblock body %}

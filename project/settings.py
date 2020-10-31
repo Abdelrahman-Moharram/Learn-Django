@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'job',
     'home',
     'contact',
-    'blog'
+    'blog',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,7 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = "accounts.account"
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
