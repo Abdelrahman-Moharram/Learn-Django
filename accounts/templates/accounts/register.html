@@ -37,7 +37,10 @@
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             
-                                {{ form|crispy }}
+                                {{  form     | crispy }}
+                                {{  form_emp | crispy }}
+
+                                <input name="user_type" value="{{type}}" hidden>
                             
                             <button type="submit" class="btn btn-success">SUBMIT</button>
                         

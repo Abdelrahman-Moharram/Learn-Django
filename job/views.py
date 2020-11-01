@@ -3,6 +3,7 @@ from .models import job
 from django.core.paginator import Paginator
 from .forms import applyform,add
 from django.contrib import messages
+from accounts.models import employeer,employee
 # Create your views here.
 
 def jobs (request):
@@ -35,7 +36,8 @@ def addJob(request):
         form = add(request.POST , request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
-            form.owner = request.user
+            emp = employeer.objects.get(user=request.user)
+            form.owner = emp.user
             form.save()
             messages.success(request,"Posted Successfully")
     form = add()

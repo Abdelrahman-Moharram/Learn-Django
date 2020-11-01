@@ -21,7 +21,7 @@ class job(models.Model):
         ("Part Time", "Part Time"),
         ("Full Time", "Full Time")
     )
-    owner        = models.ForeignKey("accounts.account",related_name='job_owner',on_delete=models.CASCADE,error_messages={"required":"you should login first"})
+    owner        = models.ForeignKey("accounts.employeer",related_name='job_owner',on_delete=models.CASCADE,error_messages={"required":"you should login first"})
     name         = models.CharField(max_length=30,error_messages={"required":"you shoould enter valid name"})
     job_type     = models.CharField(max_length=20,choices=types,error_messages={"required":"Can't be Null"})
     description  = models.TextField(max_length=1000,error_messages={"required":"enter valid message to get people like job require"})

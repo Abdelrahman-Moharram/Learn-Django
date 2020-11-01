@@ -31,6 +31,26 @@
 
     <link rel="stylesheet" href="{% static 'job/css/style.css' %}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <style>
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          padding: 12px 16px;
+          z-index: 1;
+        }
+        
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        </style>
 </head>
 
 <body>
@@ -79,20 +99,52 @@
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
                                     {% if request.user.is_authenticated %}
-                                        <div class="btn-group" style="margin-right: 1rem;">
-                                            <button type="button" class="boxed-btn3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:medium">
-                                               <img width="20px" src="{{request.user.image.url}}" alt="{{request.user.image.url}}"> {{request.user.fname}}
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                              <a href=" {% url 'accounts:logout' %} " class="dropdown-item">LOGOUT</a>
-                                            <a class="dropdown-item">Another action</a>
-                                              <a class="dropdown-item">Something else here</a>
+                                        
+                                        <div class="dropdown">
+                                            <a href=" {% url 'accounts:profile' request.user.slug %} " class="boxed-btn3">
+                                                <img width="20px" src="{{request.user.image.url}}" alt="{{request.user.image.url}}" style="border-radius: 100%;"> {{request.user.fname}}
+                                            </a>
+                                            <div class="dropdown-content">
+                                                <a class="dropdown-item"> {{request.user.email}} </a>
+                                                <a href=" {% url 'accounts:profile' request.user.slug %} " class="dropdown-item">profile</a>
+                                                <a href=" {% url 'accounts:logout' %} " class="dropdown-item">LOGOUT</a>
                                             </div>
-                                          </div>
+                                        </div>
+                                        {% if request.user.is_admin == 1 %}
+                                            <span style="margin-left: 1rem;margin-right: 1rem;">or</span>
+
+                                            <div class="d-none d-lg-block" >            <a class="boxed-btn3" href="http://127.0.0.1:8000/admin/">ADMIN</a>  </div>
+                                        {% else %}
+                                            
+                                            
+                                             
                                     
-                                    
-                                    
-                                        <div class="d-none d-lg-block" >            <a class="boxed-btn3" href="{% url 'jobs:add' %}">Post a Job</a>  </div>
+
+
+                                            {% if request.user.user_type == "employer" %}
+                                              <span style="margin-left: 1rem;margin-right: 1rem;">or</span>
+
+                                              <div class="d-none d-lg-block" >            <a class="boxed-btn3" href="{% url 'jobs:add' %}">Post a Job</a>  </div>
+                                            
+                                              {% else %}
+
+                                                <span style="margin-left: 1rem;margin-right: 1rem;">or</span>
+
+                                                <div class="dropdown">
+                                                    <a href=" {% url 'jobs:home'%} " class="boxed-btn3">
+                                                        Find Jobs
+                                                    </a>
+                                                    <div class="dropdown-content">
+                                                        
+                                                        {% for cat in request.user.Categery %}
+                                                            <a class="dropdown-item"> {{cat}} </a>
+                                                        {% endfor %}
+                                                            
+                                                        
+                                                    </div>
+                                                  </div>
+                                            {% endif %}
+                                          {% endif %}
                             
                                     {% else %}
 
@@ -101,7 +153,15 @@
                                                     
                                                     <span style="margin-left: 1rem;margin-right: 1rem;">or</span>
                                                 
-                                                <div class="d-none d-lg-block">   <a class="boxed-btn3" href="{% url 'accounts:register' %}">Register</a>  </div>
+                                                <div class="btn-group" style="margin-right: 1rem;">
+                                                        <button type="button" class="boxed-btn3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:medium">
+                                                           REGISTER
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href=" {% url 'accounts:employee' %} " class="dropdown-item">employee</a>
+                                                            <a href=" {% url 'accounts:employer' %} " class="dropdown-item">employer</a>
+                                                        </div>
+                                                </div>
 
 
                                                

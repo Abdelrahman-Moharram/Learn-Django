@@ -7,7 +7,7 @@ class userForm(UserCreationForm):
     class Meta:
         model   = account
         fields  = '__all__'
-        exclude = ('slug','joined_at','is_admin','is_staff','is_superuser','last_login','password')
+        exclude = ('slug','joined_at','is_admin','is_staff','is_superuser','last_login','password','user_type')
 
 class employeerForm(forms.ModelForm):
     class Meta:
