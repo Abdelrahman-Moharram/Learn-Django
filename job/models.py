@@ -16,6 +16,11 @@ class Category(models.Model):
     def __str__(self):
 	    return self.name
 
+
+def image_upload(instance,filename):
+	image,extention = filename.split(".")
+	return 'media/jobs/%s/%s.%s'%(instance.id,instance.id,extention)
+
 class Job(models.Model):
 	
 	title = models.CharField(max_length=50)
@@ -34,6 +39,7 @@ class Job(models.Model):
 
 	cat = models.ForeignKey(Category,verbose_name = "Category Name", on_delete=models.CASCADE)
 
+	image = models.ImageField(upload_to=image_upload,default='media/default/job-offer-on-orange-note-260nw-752376046.jpg')
 
 	def __str__(self):
 	    return self.title

@@ -9,6 +9,5 @@ def jobList(request):
 	
 
 def jobDetail(request,id):
-	
 	return render(request, 'job/jobDetail.html', {'job':Job.objects.get(id = id)})
 	

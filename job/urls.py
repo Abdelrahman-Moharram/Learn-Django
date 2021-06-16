@@ -3,9 +3,10 @@ from django.contrib import admin
 from django.urls import path , include
 from . import views
 
+app_name = 'job'
 urlpatterns = [
     path('browse/', views.jobList),
     path('', views.jobList),
-    path('<int:id>', views.jobDetail),
+    path('<int:id>', views.jobDetail,name="jobDetail"),
 
 ]
