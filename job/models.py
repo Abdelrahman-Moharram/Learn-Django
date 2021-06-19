@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 jobType = {
 	('Full Time','Full Time'),
 	('Part Time','Part Time'),
@@ -23,6 +24,8 @@ def image_upload(instance,filename):
 
 class Job(models.Model):
 	
+	employer = models.ForeignKey(User,  on_delete=models.CASCADE)
+ 
 	title = models.CharField(max_length=50)
 	
 	job_type = models.CharField(max_length=50,choices = jobType)
@@ -56,15 +59,14 @@ def cv_upload(instance,filename):
 	cv,extention = filename.split(".")
 	return 'media/job_applications/%s/%s.%s'%(instance.id,instance.id,extention)
 
-class employee(models.Model):
+class job_application(models.Model):
+        employee = models.ForeignKey(User,  on_delete=models.CASCADE)
         jobId = models.ForeignKey(Job, verbose_name=("Job"), on_delete=models.CASCADE)
-        name = models.CharField(max_length=50)
-        email = models.EmailField(max_length=254)
         protifolio = models.URLField(max_length=200)
         cv = models.FileField(upload_to=cv_upload)
         coverLetter = models.TextField(max_length=500)
         applyAt = models.DateTimeField(auto_now=True)
 
         def __str__(self):
-        	return self.name
+        	return str(self.employee)
 	
