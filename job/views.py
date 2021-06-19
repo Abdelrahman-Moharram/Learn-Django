@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Job,Category
 from django.core.paginator import Paginator
 from .form import emp_application
@@ -20,11 +20,10 @@ def jobDetail(request,slug):
         if request.method == 'POST':
                 form = emp_application(request.POST ,request.FILES)
                 if form.is_valid():
-                        form.save(commit=False)
-                        form.jobId = job.id
-                        print("\n\n\n\n\n\n\n\n\n\n\n\n",job.id,"\n\n\n\n\n\n\n\n\n\n\n\n",)
+                        form = form.save(commit=False)
+                        form.jobId = job
                         form.save()
-                        
+                        return redirect("http://127.0.0.1:8000/jobs/")
                 
         return render(request, 'job/jobDetail.html', {'job':job})
 	
