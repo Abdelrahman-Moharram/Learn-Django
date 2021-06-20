@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from .models import Job,Category
 from django.core.paginator import Paginator
 from .form import emp_application,add_New_Job
@@ -23,9 +23,9 @@ def jobDetail(request,slug):
                 if form.is_valid():
                         form = form.save(commit=False)
                         form.jobId = job
-                        form.employee = User.objects.get(id = 2)
+                        form.employee = request.user
                         form.save()
-                        return redirect("http://127.0.0.1:8000/jobs/")
+                        return redirect(reverse("jobs:jobList"))
                 
         return render(request, 'job/jobDetail.html', {'job':job})
 	
@@ -35,5 +35,8 @@ def add_job(request):
         if request.method == 'POST':
                 form = add_New_Job(request.POST)
                 if form.is_valid():
+                        form = form.save(commit=False)
+                        form.employer = request.user
                         form.save()
+                        return redirect(reverse("jobs:jobList"))
         return render(request, 'job/addJob.html', {'addNewJob':add})
