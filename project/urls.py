@@ -10,8 +10,8 @@ urlpatterns = [
     path('jobs/', include("job.urls",namespace="jobs")),
     path('', include("home.urls",namespace="home")),
     path('contact/', include("contact.urls")),
-    path('accounts/', include("accounts.urls")),
-    path('blog/', include("blog.urls")),
+    path('accounts/', include("accounts.urls",namespace="accounts")),
+    path('blog/', include("blog.urls",namespace="blog")),
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

@@ -1,18 +1,8 @@
 {% extends 'base.html' %}
-
+{% block bradcam_text %}
+    {{job.cat}}
+{% endblock bradcam_text %}
 {% block body %}
-    <div class="bradcam_area bradcam_bg_1">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text">
-                        <h3>{{job.cat}}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="job_details_area">
         <div class="container">
