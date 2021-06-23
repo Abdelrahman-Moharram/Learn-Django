@@ -19,9 +19,8 @@ class Category(models.Model):
 
 
 def image_upload(instance,filename):
-	image,extention = filename.split(".")
-	return 'media/jobs/%s/%s.%s'%(instance.id,instance.id,extention)
-
+        imageFile,extention = filename.split(".")
+        return "media/users/%s/%s.%s"%(instance.title,instance.title,extention)
 class Job(models.Model):
 	
 	employer = models.ForeignKey(User,  on_delete=models.CASCADE)
@@ -55,15 +54,13 @@ class Job(models.Model):
 	    return self.title
 
 
-def cv_upload(instance,filename):
-	cv,extention = filename.split(".")
-	return 'media/job_applications/%s/%s.%s'%(instance.id,instance.id,extention)
+
 
 class job_application(models.Model):
         employee = models.ForeignKey(User,  on_delete=models.CASCADE)
         jobId = models.ForeignKey(Job, verbose_name=("Job"), on_delete=models.CASCADE)
         protifolio = models.URLField(max_length=200)
-        cv = models.FileField(upload_to=cv_upload)
+        cv = models.FileField(upload_to=image_upload)
         coverLetter = models.TextField(max_length=500)
         applyAt = models.DateTimeField(auto_now=True)
 

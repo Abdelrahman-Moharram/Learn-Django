@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
-{% block bradcam_text %}
-    {{jobs|length}} + Jobs Available
-{% endblock bradcam_text %}
+{% block headerElse %}
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>
+                            {{jobs|length}} + Jobs Available
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock headerElse %}
 {% block body %}
     <div class="job_listing_area plus_padding">
         <div class="container">

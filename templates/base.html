@@ -90,10 +90,12 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 
-                                {% if request.user.is_authenticated %}
+                                {% if user.is_authenticated %}
                                    <div class="Appointment">
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="{% url 'accounts:login' %}">{{request.user.username}}</a>
+                                        <a href="{% url 'accounts:login' %}">
+                                            <img src="{{request.session.image.url}}" alt="">
+                                            {{request.session.username}}</a>
                                     </div>
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="{% url 'jobs:addJob' %}">Post Job</a>
@@ -108,7 +110,7 @@
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="{% url 'accounts:register' %}">Register</a>
                                     </div>
-                                    </div>
+                                </div>
                                 {% endif %}
                                     
                             </div>
@@ -125,26 +127,13 @@
 
    
 
-    <div class="slider_area">
-        <div class="single_slider  d-flex align-items-center slider_bg_1">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 col-md-6">
-                        <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">{% block indexJobCounts %} {% endblock indexJobCounts %}</h5>
-                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">{% block bradcam_text %} {% endblock bradcam_text %}</h3>
-                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">{% block smalldesc %}{% endblock smalldesc %}</p>
-                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
-            <img src="img/banner/illustration.png" alt="">
-        </div>
-    </div>
+    {% block headerIndex %}
+    
+    {% endblock headerIndex %}
+
+    {% block headerElse %}
+            
+    {% endblock headerElse %}
 
 
 
