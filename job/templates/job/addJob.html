@@ -23,7 +23,7 @@
 
     <div class="container">
 	    <div class="row">
-		<form method="post" class="form col-8 mx-auto mt-5">
+		<form method="post" enctype="multipart/form-data" class="form col-8 mx-auto mt-5">
 			{% csrf_token %}
 			{% bootstrap_form addNewJob %}
 			<div class="submit_btn mb-5">

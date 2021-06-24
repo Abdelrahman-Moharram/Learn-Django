@@ -33,7 +33,7 @@ def jobDetail(request,slug):
 def add_job(request):
         add = add_New_Job()
         if request.method == 'POST':
-                form = add_New_Job(request.POST)
+                form = add_New_Job(request.POST,request.FILES)
                 if form.is_valid():
                         form = form.save(commit=False)
                         form.employer = request.user

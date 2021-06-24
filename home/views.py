@@ -27,7 +27,7 @@ def edit_user(request,username):
         else:
                 if request.method == 'POST':
                         userform = updateUser(request.POST,instance=request.user)
-                        usertips = updateUserTips(request.POST,instance=usertipsData)
+                        usertips = updateUserTips(request.POST,request.FILES,instance=usertipsData)
                         
                         if userform.is_valid() and usertips.is_valid():
                                 userform.save()

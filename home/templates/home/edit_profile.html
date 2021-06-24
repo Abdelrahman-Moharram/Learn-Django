@@ -21,7 +21,7 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-md-10 mx-auto mt-5 mb-5 white-bg">
-		    <form method="POST">
+		    <form method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 				<div class="col-md-12">
 					<div class="input_field">
@@ -32,7 +32,7 @@
 				</div>
 			    <div class="col-md-12">
 				<div class="submit_btn">
-				    <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+				    <button class="boxed-btn3 w-100" type="submit">Save</button>
 				</div>
 			    </div>
 			</div>

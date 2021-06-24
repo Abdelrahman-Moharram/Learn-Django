@@ -44,7 +44,7 @@ def register(request):
                         user.first_name = request.POST['first_name']
                         user.last_name = request.POST['last_name']
                         user.save()
-                        usertips = addUserTips(request.POST)
+                        usertips = addUserTips(request.POST,request.FILES)
                         usertips = usertips.save(commit = False)
                         usertips.user = user
                         usertips.save()
