@@ -3,6 +3,9 @@ from .forms import addUserTips
 from .models import userTips
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+
 def login_user(request):
         if request.method == "POST":
                 username = request.POST['username']
@@ -72,7 +75,7 @@ def register(request):
                                 return redirect("jobs:jobLis")
                 
         return render(request,'accounts/register.html', {'addUserTips':addUserTips()})
-
+@login_required
 def logout_user(request):
         logout(request)
         return redirect("home:index")

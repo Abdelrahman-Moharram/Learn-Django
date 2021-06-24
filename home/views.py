@@ -3,6 +3,7 @@ from job.models import Job,job_application
 from accounts.models import userTips
 from django.contrib.auth.models import User
 from .forms import updateUser, updateUserTips
+from django.contrib.auth.decorators import login_required
 
 def home(request):
         jobs = Job.objects.all()
@@ -16,7 +17,7 @@ def user_profile(request,username):
         apps = job_application.objects.filter(employee=user)
 
         return render(request,"home/profile.html",{'user':user,'userTips':usertipsData,'jobs':jobs,'apps':apps})
-
+@login_required
 def edit_user(request,username):
         usertipsData = userTips.objects.get(user=request.user)
         

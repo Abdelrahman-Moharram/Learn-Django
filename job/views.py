@@ -3,6 +3,7 @@ from .models import Job,Category
 from django.core.paginator import Paginator
 from .form import emp_application,add_New_Job
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 def jobList(request):
 	
 
@@ -29,7 +30,7 @@ def jobDetail(request,slug):
                 
         return render(request, 'job/jobDetail.html', {'job':job})
 	
-
+@login_required
 def add_job(request):
         add = add_New_Job()
         if request.method == 'POST':
