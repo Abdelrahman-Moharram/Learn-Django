@@ -33,7 +33,7 @@ def login_user(request):
                         
                         
                         if user.is_superuser:
-                                return redirect("/admin")
+                                return redirect("/admin/")
                         else:
                                 return redirect("home:index")
                 else:

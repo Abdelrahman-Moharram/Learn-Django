@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 
-                                {% if user.is_authenticated %}
+                                {% if user.is_authenticated and request.user.username %}
                                    <div class="Appointment">
                                     
                                     <div class="dropdown mr-5">
@@ -108,7 +108,7 @@
                                             {{request.session.username}}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="{% url 'home:user_profile' request.session.username %}">Profile</a>
+                                          <a class="dropdown-item" href="{% url 'home:user_profile' request.user.username  %}">Profile</a>
                                           <a class="dropdown-item" href="#">Another action</a>
                                           <div class="dropdown-divider"></div>
                                           <a class="dropdown-item b-danger" href="{% url 'accounts:logout' %}">Logout</a>
