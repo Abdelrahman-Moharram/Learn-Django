@@ -42,6 +42,15 @@
      .thumb img{
 	     width:60px;
      }
+
+     .dropdown-item {
+        color: #fff;
+      }
+      
+      /* and this styles the dropdwon trigger link, when open */
+      .dropdown-item:hover { 
+        color: #1a1a1a;
+      }
     </style>
 </head>
 
@@ -92,13 +101,21 @@
                                 
                                 {% if user.is_authenticated %}
                                    <div class="Appointment">
-                                    <div class="phone_num d-none d-xl-block">
-                                        <a href="{% url 'accounts:login' %}">
-                                            <img src="{{request.session.image.url}}" alt="">
-                                            {{request.session.username}}</a>
-                                    </div>
+                                    
+                                    <div class="dropdown mr-5">
+                                        <button class="btn btn-outline-success text-light dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{request.user.image.url}}" alt="">
+                                            {{request.session.username}}
+                                        </button>
+                                        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="{% url 'home:user_profile' request.session.username %}">Profile</a>
+                                          <a class="dropdown-item" href="#">Another action</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item b-danger" href="{% url 'accounts:logout' %}">Logout</a>
+                                        </div>
+                                      </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="{% url 'jobs:addJob' %}">Post Job</a>
+                                        <a class="btn btn-success text-light" href="{% url 'jobs:addJob' %}">Post Job</a>
                                     </div>
                                     </div>
                                 

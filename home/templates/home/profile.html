@@ -1,0 +1,195 @@
+{% load static %}
+<!doctype html>
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Snippet - BBBootstrap</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+                                <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='' rel='stylesheet'>
+                                <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <style>.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+body {
+    background: #654ea3;
+    background: linear-gradient(to right, #e96443, #904e95);
+    min-height: 100vh;
+    overflow-x: hidden
+}
+                                .thumb{
+	     background-image: initial;
+    	     background-color: rgb(28, 31, 32);
+    	     border-color: rgb(52, 57, 59);
+    	     padding: 0px !important;
+    	     width: fit-content !important;
+    	     height: fit-content !important;
+     }
+     .thumb img{
+	     width:60px;
+     }
+          .dropdown-item {
+        color: #fff;
+      }
+
+      /* and this styles the dropdwon trigger link, when open */
+      .dropdown-item:hover {
+        color: #1a1a1a;
+      }
+                                </style>
+                                </head>
+                                <body oncontextmenu='return false' class='snippet-body'>
+
+
+                                <header>
+        <div class="header-area" style="background-color: #3399ff">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="{% url 'home:index' %}">
+                                        <img src="{% static 'img/logo.png' %}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="{% url 'home:index' %}">home</a></li>
+                                            <li><a href="{% url 'jobs:jobList' %}">Browse Job</a></li>
+                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="candidate.html">Candidates </a></li>
+                                                    <li><a href="job_details.html">job details </a></li>
+                                                    <li><a href="elements.html">elements</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">blog</a></li>
+                                                    <li><a href="single-blog.html">single-blog</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+
+                                {% if user.is_authenticated %}
+                                   <div class="Appointment">
+
+                                    <div class="dropdown mr-5">
+                                        <button class="btn btn-outline-success text-light dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{request.user.image.url}}" alt="">
+                                            {{request.session.username}}
+                                        </button>
+                                        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="{% url 'home:user_profile' request.session.username %}">Profile</a>
+                                          <a class="dropdown-item" href="#">Another action</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item b-danger" href="{% url 'accounts:logout' %}">Logout</a>
+                                        </div>
+                                      </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="btn btn-success text-light" href="{% url 'jobs:addJob' %}">Post Job</a>
+                                    </div>
+                                    </div>
+
+                                {% else %}
+                                    <div class="Appointment">
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="{% url 'accounts:login' %}">Log in</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="{% url 'accounts:register' %}">Register</a>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+                                <div class="row py-5 px-4">
+    <div class="col-md-10 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img src="{{userTips.userImage.url}}" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">{{request.session.username | upper }}</h4>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>New York</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{jobs | length}}</h5><small class="text-muted"> </i>Published</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{apps | length}}</h5><small class="text-muted"> job applied</small>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="px-4 py-3">
+                <h5 class="mb-0">About</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0"><i class="las la-user-tie mr-2"></i> {{request.session.first_name}} {{request.session.last_name}}</p>
+                    <p class="font-italic mb-0"><i class="las la-envelope mr-2"></i> {{request.session.email}}</p>
+                    <p class="font-italic mb-0"><i class="las la-map-marker-alt mr-2"></i> Lives in New York</p>
+                    <p class="font-italic mb-0"><i class="las la-building mr-2"></i> Photographer</p>
+                    <p class="font-italic mb-0"><i class="las la-clock mr-2"></i> {{request.user.date_joined |date:'d M o'}}</p>
+                </div>
+            </div>
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Recent photos</h5><a href="#" class="btn btn-link text-muted">Show all</a>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+                                </body>
+                            </html>
