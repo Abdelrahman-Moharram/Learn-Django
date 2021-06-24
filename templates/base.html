@@ -43,14 +43,14 @@
 	     width:60px;
      }
 
-     .dropdown-item {
-        color: #fff;
-      }
-      
-      /* and this styles the dropdwon trigger link, when open */
-      .dropdown-item:hover { 
-        color: #1a1a1a;
-      }
+     .dropdown-item{
+         font-family: "Roboto", sans-serif;
+         font-weight: 500;
+         font-size: 13px;
+         color: #000;
+     }
+
+     
     </style>
 </head>
 
@@ -107,7 +107,7 @@
                                             <img src="{{request.user.image.url}}" alt="">
                                             {{request.session.username}}
                                         </button>
-                                        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <a class="dropdown-item" href="{% url 'home:user_profile' request.session.username %}">Profile</a>
                                           <a class="dropdown-item" href="#">Another action</a>
                                           <div class="dropdown-divider"></div>

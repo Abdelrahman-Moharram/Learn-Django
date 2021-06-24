@@ -14,6 +14,7 @@ def login_user(request):
                                 tipsData = userTips.objects.get(user_id=user.id)
                                 request.session['image'] = str(tipsData.userImage)
                                 request.session['userType'] = tipsData.userType
+                                request.session['job_title'] = str(tipsData.job_title)
                         except:
                             pass
                         
@@ -56,6 +57,7 @@ def register(request):
                                         tipsData = userTips.objects.get(user_id=user.id)
                                         request.session['image'] = str(tipsData.userImage)
                                         request.session['userType'] = tipsData.userType
+                                        request.session['job_title'] = str(tipsData.job_title)
                                 except:
                                     pass
                                 request.session['id'] = user.id

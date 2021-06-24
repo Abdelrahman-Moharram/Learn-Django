@@ -6,6 +6,6 @@ from django.contrib.auth.models import User
 class addUserTips(forms.ModelForm):
     class Meta:
             model = userTips
-            fields = ['userType','userImage']
+            fields = ['userType','userImage','job_title']
             
  
