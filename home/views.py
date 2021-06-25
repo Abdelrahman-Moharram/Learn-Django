@@ -4,6 +4,7 @@ from accounts.models import userTips
 from django.contrib.auth.models import User
 from .forms import updateUser, updateUserTips
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def home(request):
         jobs = Job.objects.all()
@@ -46,7 +47,7 @@ def edit_user(request,username):
                                 request.session['email'] = request.user.email
                                 request.session['username'] = request.user.username
                                 request.session['is_superuser'] = request.user.is_superuser
-                                
+                                messages.success(request,"Data UPDATED Successfully",extra_tags="success")
                                 return redirect("/"+request.user.username)
                         
                         

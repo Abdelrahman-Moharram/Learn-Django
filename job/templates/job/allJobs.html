@@ -17,6 +17,7 @@
     </div>
 {% endblock headerElse %}
 {% block body %}
+
     <div class="job_listing_area plus_padding">
         <div class="container">
             <div class="row">
@@ -122,5 +123,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function closeNotify(id){
+            var card = document.getElementsByClassName("cards");
+            card[id].style.display = "none";
+
+        }
+
+        var notNum =  document.getElementById("notify-num");
+        if (notNum.innerHTML == 0){
+            notNum.style.visibility = "hidden";
+        }
+        else if(notNum.innerHTML > 99){
+            notNum.innerHTML = "+99";
+        }
+
+    </script>
 
 {% endblock body %}

@@ -5,6 +5,7 @@ from .form import emp_application,add_New_Job
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .filters import jobFilter
+from django.contrib import messages
 def jobList(request):
         
         jobs = Job.objects.all()
@@ -30,6 +31,7 @@ def jobDetail(request,slug):
                         form.jobId = job
                         form.employee = request.user
                         form.save()
+                        messages.success(request,"Apllied Job Successfully",extra_tags="success")
                         return redirect(reverse("jobs:jobList"))
                 
         return render(request, 'job/jobDetail.html', {'job':job})
@@ -43,5 +45,6 @@ def add_job(request):
                         form = form.save(commit=False)
                         form.employer = request.user
                         form.save()
+                        messages.success(request,"Job Added Successfully",extra_tags="success")
                         return redirect(reverse("jobs:jobList"))
         return render(request, 'job/addJob.html', {'addNewJob':add})

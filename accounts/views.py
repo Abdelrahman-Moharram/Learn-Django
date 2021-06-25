@@ -4,6 +4,7 @@ from .models import userTips
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def login_user(request):
@@ -37,7 +38,8 @@ def login_user(request):
                         else:
                                 return redirect("home:index")
                 else:
-                        pass
+                        messages.warning(request,"Can't Login E-Mail or Password are invalid",extra_tags="warning")
+
         return render(request,'accounts/login.html', {})
 
 def register(request):
@@ -69,11 +71,14 @@ def register(request):
                                 request.session['email'] = user.email
                                 request.session['username'] = user.username
                                 request.session['is_superuser'] = user.is_superuser
-                                
+                                messages.success(request,"Your Data has Saved!",extra_tags="success")
+
                                 return redirect("home:index")
                         else:
+                                messages.warning(request,"Error while signing you in but your data has Saved!",extra_tags="warning")
                                 return redirect("jobs:jobLis")
-                
+                else:
+                        messages.warning(request,"Password Not The Same",extra_tags="warning")
         return render(request,'accounts/register.html', {'addUserTips':addUserTips()})
 @login_required
 def logout_user(request):

@@ -12,7 +12,8 @@
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
     <!-- Place favicon.ico in the root directory -->
-
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 
 
@@ -55,11 +57,21 @@
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-    <!-- header-start -->
+    <div class="container-fluid">
+        <div class="row">
+            {% if messages is not '' %}
+                {% for message in messages %}
+                    <div class="col-xl-9 col-lg-9 col-md-6 col-sm-1"></div>
+                    <a class="cards {{message.extra_tags}}-card col-xl-2 col-lg-2 col-md-5 col-sm-10" style="position: absolute;float:right">
+                    
+                        <i class="las la-times close-card" id="0" onclick="closeNotify(id)"></i>
+                        <div class="card-title">{{message.extra_tags}}</div>
+                        <div class="card-cont">{{message}}</div>
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">

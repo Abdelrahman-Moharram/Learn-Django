@@ -12,6 +12,7 @@ urlpatterns = [
     path('contact/', include("contact.urls")),
     path('accounts/', include("accounts.urls",namespace="accounts")),
     path('blog/', include("blog.urls",namespace="blog")),
+    path('api/', include('rest_framework.urls')),
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
