@@ -4,17 +4,21 @@ from django.core.paginator import Paginator
 from .form import emp_application,add_New_Job
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .filters import jobFilter
 def jobList(request):
-	
-
-	paginator = Paginator(Job.objects.all(),1)
- 
-	pNum = request.GET.get("page")
-	
-	pObjs = paginator.get_page(pNum)
-
- 
-	return render(request,'job/allJobs.html', {'jobs':pObjs})
+        
+        jobs = Job.objects.all()
+        
+        myfilter = jobFilter(request.GET,queryset=jobs)
+        jobs = myfilter.qs
+        
+        paginator = Paginator(jobs,10)
+        
+        pNum = request.GET.get("page")
+        
+        pObjs = paginator.get_page(pNum)
+        
+        return render(request,'job/allJobs.html', {'jobs':pObjs,'filter':myfilter})
 	
 
 def jobDetail(request,slug):
