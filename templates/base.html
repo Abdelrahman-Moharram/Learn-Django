@@ -64,7 +64,7 @@
                     <div class="col-xl-9 col-lg-9 col-md-6 col-sm-1"></div>
                     <a class="cards {{message.extra_tags}}-card col-xl-2 col-lg-2 col-md-5 col-sm-10" style="position: absolute;float:right">
                     
-                        <i class="las la-times close-card" id="0" onclick="closeNotify(id)"></i>
+                        <i class="las la-times close-card" id="{{message}}" onclick="closeNotify('{{message}}')"></i>
                         <div class="card-title">{{message.extra_tags}}</div>
                         <div class="card-cont">{{message}}</div>
                     </a>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 
-                                {% if user.is_authenticated and request.user.username %}
+                                {% if request.user.username != '' %}
                                    <div class="Appointment">
                                     
                                     <div class="dropdown mr-5">

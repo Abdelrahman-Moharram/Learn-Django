@@ -25,7 +25,7 @@ def edit_user(request,username):
         userform = updateUser(instance=request.user)
         usertips = updateUserTips(instance=usertipsData)
         if username != request.user.username:
-                return redirect("home:index")
+                return redirect("home:edit_user",username=request.user.username)
         else:
                 if request.method == 'POST':
                         userform = updateUser(request.POST,instance=request.user)
