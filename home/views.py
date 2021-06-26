@@ -11,6 +11,9 @@ def home(request):
         jobs = jobs[:10]
         return render(request,'home/index.html', {'jobs':jobs})
 
+
+
+
 def user_profile(request,username):
         user = User.objects.get(username=username)
         usertipsData = userTips.objects.get(user=user)

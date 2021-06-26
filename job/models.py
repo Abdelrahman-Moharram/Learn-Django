@@ -46,7 +46,7 @@ class Job(models.Model):
 	slug = models.SlugField(blank=True,null=True)
  
 	def save(self, *args, **kwargs):
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title+str(self.id))
             super(Job,self).save(*args,**kwargs)
 
 	def __str__(self):
