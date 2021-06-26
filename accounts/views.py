@@ -5,7 +5,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def login_user(request):
         if request.method == "POST":
@@ -19,6 +20,10 @@ def login_user(request):
                                 request.session['image'] = str(tipsData.userImage)
                                 request.session['userType'] = tipsData.userType
                                 request.session['job_title'] = str(tipsData.job_title)
+                                if tipsData.verfication == False:
+                                        verficationId = 239434521+user.id+tipsData.id
+                                        send_mail('verfication link is ',"http://127.0.0.1:8000/accounts/{}".format(verficationId),settings.EMAIL_HOST_USER,[user.email],)
+                                        messages.warning(request,"Your Email not verfied please check your email",extra_tags="warning")
                         except:
                             pass
                         
@@ -30,7 +35,7 @@ def login_user(request):
                         request.session['username'] = user.username
                         request.session['is_superuser'] = user.is_superuser
                         request.session['date'] = str(user.date_joined)
-
+                        
                         
                         
                         if user.is_superuser:
@@ -42,6 +47,7 @@ def login_user(request):
 
         return render(request,'accounts/login.html', {})
 
+verficationId = 0
 def register(request):
         if request.method == "POST":
                 if request.POST['password'] == request.POST['confirm_password']:
@@ -53,6 +59,8 @@ def register(request):
                         usertips = usertips.save(commit = False)
                         usertips.user = user
                         usertips.save()
+                        verficationId = 239434521+user.id+usertips.id
+                        send_mail('verfication link is ',"http://127.0.0.1:8000/accounts/{}".format(verficationId),settings.EMAIL_HOST_USER,[user.email],)
                         username = request.POST['username']
                         password = request.POST['password']
                         user = authenticate(request,username=username,password=password)
@@ -63,6 +71,11 @@ def register(request):
                                         request.session['image'] = str(tipsData.userImage)
                                         request.session['userType'] = tipsData.userType
                                         request.session['job_title'] = str(tipsData.job_title)
+                                        if tipsData.verfication == False:
+                                                verficationId = 239434521+user.id+tipsData.id
+                                                send_mail('verfication link is ',"http://127.0.0.1:8000/accounts/{}".format(verficationId),settings.EMAIL_HOST_USER,[user.email],)
+                                                messages.warning(request,"Your Email not verfied please check your email",extra_tags="warning")
+                        
                                 except:
                                     pass
                                 request.session['id'] = user.id
@@ -83,4 +96,12 @@ def register(request):
 @login_required
 def logout_user(request):
         logout(request)
+        return redirect("home:index")
+
+print("\n\n\n\n\n\n\n\n",verficationId,"\n\n\n\n\n\n\n\n\n\n")
+def verfication(request,verficationId):
+        user = userTips.objects.get(user=request.user)
+        user.verfication = True
+        user.save()
+        messages.success(request,"verfied successfully",extra_tags="success")
         return redirect("home:index")
