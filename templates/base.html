@@ -62,10 +62,10 @@
             {% if messages is not '' %}
                 {% for message in messages %}
                     <div class="col-xl-9 col-lg-9 col-md-6 col-sm-1"></div>
-                    <a class="cards {{message.extra_tags}}-card col-xl-2 col-lg-2 col-md-5 col-sm-10" style="position: absolute;float:right">
+                    <a class="cards {{message.level_tag}}-card col-xl-2 col-lg-2 col-md-5 col-sm-10" id="{{message.level_tag}}{{message.extra_tags}}"  style="position: absolute;float:right">
                     
-                        <i class="las la-times close-card" id="{{message}}" onclick="closeNotify('{{message}}')"></i>
-                        <div class="card-title">{{message.extra_tags}}</div>
+                        <i class="las la-times close-card" onclick="closeNotify('{{message.level_tag}}{{message.extra_tags}}')"></i>
+                        <div class="card-title">{{message.level_tag}}</div>
                         <div class="card-cont">{{message}}</div>
                     </a>
                 {% endfor %}
@@ -313,6 +313,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
         } );
+
+        function closeNotify(id){
+            document.getElementById(id).style.display = "none";
+
+        }
         </script>
 </body>
 
